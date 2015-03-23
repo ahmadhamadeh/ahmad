@@ -22,8 +22,6 @@ public class UploadServlet extends HttpServlet {
     private DatabaseController dbController;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        System.out.println("\n\nUpload servlet\n\n");
 
         dbClient = DatabaseSetup.getDbCliend();
 
@@ -33,15 +31,7 @@ public class UploadServlet extends HttpServlet {
         String docId = resp.getId();
         request.setAttribute("docId", docId);
 
-        out.println("Finish with adding");
-
         RequestDispatcher dispatcher = request.getRequestDispatcher("afterAddedDocument.jsp");
         dispatcher.forward(request, response);
-    }
-
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.println("doPost");
     }
 }

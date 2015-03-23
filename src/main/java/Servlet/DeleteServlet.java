@@ -22,8 +22,6 @@ public class DeleteServlet extends HttpServlet {
     private DatabaseController dbController;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.println("doGet DeleteServlet");
         String id = request.getParameter("id");
 
         dbClient = DatabaseSetup.getDbCliend();
@@ -42,11 +40,5 @@ public class DeleteServlet extends HttpServlet {
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("afterDeletedDocument.jsp");
         dispatcher.forward(request, response);
-    }
-
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.println("doPost");
     }
 }

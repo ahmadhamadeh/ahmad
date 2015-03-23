@@ -1,14 +1,13 @@
+package Controller;
 
-import Controller.DatabaseController;
-import Controller.DatabaseSetup;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import Entity.DummyData;
 import org.junit.Before;
 import org.junit.Test;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
 import org.lightcouch.Response;
 
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 public class DatabaseControllerTest {
@@ -50,14 +49,35 @@ public class DatabaseControllerTest {
         assertEquals(jsonObject.get("appname").getAsString(), "simple-app");
         dbClient.remove(jsonObject);
     }
-
+*/
     @Test
     public void addAndRemoveFromDatabase() {
+
+        //Adding data to database
         dbClient = DatabaseSetup.getDbCliend();
         databaseController = new DatabaseController();
+        String id = "";
+        DummyData dummyData = null;
+        try {
+            id = databaseController.addToDatabase(dbClient).getId();
+            dummyData = dbClient.find(DummyData.class, id);
+        } catch (Exception e) {
+            fail("Could not add data to database");
+        }
 
-        String id = databaseController.addToDatabase(dbClient).getId();
-        assertEquals("Dummydata deleted", databaseController.removeDocument(dbClient, id));
+        // Looking for the data in the database.
+        assertEquals(dummyData.get_id(), id);
+        DummyData deletedObject = null;
+
+        //Deleting the data from the database
+        try {
+            databaseController.removeDocument(dbClient, id);
+            // Trying to find the deleted object.
+            deletedObject = dbClient.find(DummyData.class, id);
+            assertThat("The object created for the test was not deleted.", deletedObject, is(notNullValue()));
+        } catch (Exception e) {
+            assertThat(deletedObject, is(nullValue()));
+        }
     }
 
     @Test
@@ -68,6 +88,4 @@ public class DatabaseControllerTest {
         Response r = databaseController.addToDatabase(dbClient);
         assertTrue(r.getId().length() > 0);
     }
-
-*/
 }
