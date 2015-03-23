@@ -1,5 +1,0 @@
-Controller\DatabaseController.class
-Entity\DummyData.class
-Servlet\UploadServlet.class
-Controller\DatabaseSetup.class
-Servlet\DeleteServlet.class
