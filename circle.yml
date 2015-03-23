@@ -1,0 +1,14 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker build -t ahmadhamadeh/adriano .
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -e $ahmad.hamadeh@accenture.com -u ahmadhamadeh -p $DOCKER_PASS
+      - docker push ahmadhamadeh/adriano
