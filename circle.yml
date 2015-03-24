@@ -16,5 +16,5 @@ deployment:
     branch: master
     commands:
 
-      - docker login -e $fletn3000@hotmail.com -u manlulu -p $DOCKER_PASS
+      - docker login -e $kim.flaethe@accenture.com -u manlulu -p $DOCKER_PASS
       - docker push manlulu/circle
