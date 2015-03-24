@@ -7,7 +7,7 @@ dependencies:
   pre:
   - mvn clean install
   post:
-  - docker build -t manlulu/circle .
+  - docker build -t ahmadhamadeh/adriano .
   
 
 
@@ -16,5 +16,5 @@ deployment:
     branch: master
     commands:
 
-      - docker login -e $ahmad.hamadeh@accenture.com -u ahmadhamadeh-p $DOCKER_PASS
+      - docker login -e $ahmad.hamadeh@accenture.com -u ahmadhamadeh -p $DOCKER_PASS
       - docker push ahmadhamadeh/adriano
