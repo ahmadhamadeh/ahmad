@@ -1,17 +1,17 @@
 machine:
-services:
-- docker
+   services:
+   - docker
 
 dependencies:
-override:
-pre:
-- mvn clean install
-post:
-- docker build -t manlulu/circle .
+  override:
+    pre:
+    - mvn clean install
+    post:
+    - docker build -t manlulu/circle .
 
 deployment:
-hub:
-branch: master
-commands:
-- docker login -e $fletn3000@hotmail.com -u manlulu -p $DOCKER_PASS
-- docker push manlulu/circle
+  hub:
+    branch: master
+    commands:
+    - docker login -e $fletn3000@hotmail.com -u manlulu -p $DOCKER_PASS
+    - docker push manlulu/circle
